@@ -13,6 +13,7 @@
         
         <h1 id="title">Tic Tac Toe, Here We Go!</h1>
         <h2 id="player-turn">X's turn</h2>
+        <input type="text" id="player1-input" class="player-input" placeholder="Set Player 1" maxlength="9" onchange="setChar(this)" onkeyup="this.value = this.value.toUpperCase()">
         <div id="game-board">
             <table>
                 <tr>
@@ -26,6 +27,7 @@
                 </tr>
             </table>
         </div>
+        <input type="text" id="player2-input" class="player-input" placeholder="Set Player 2" maxlength="9" onchange="setChar(this)" onkeyup="this.value = this.value.toUpperCase()">
         <button id="reset-btn">Again!</button>
         
         

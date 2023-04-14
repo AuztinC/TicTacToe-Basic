@@ -1,11 +1,14 @@
 let gameBlock = $('.game-block')
 let playerTurn = $('#player-turn')
 let resetBtn = $('#reset-btn')
+let tr = $('tr')
 // playerTurn = playerTurn[0]
 // gameBlock = Array.from(gameBlock)
 
 let playerOne = null
+let playerOneChar = "X"
 let playerTwo = null
+let playerTwoChar = "O"
 
 // let activeBlock = true;
 
@@ -27,8 +30,8 @@ function start(){
         
     playerTurn.text( pickTurn() );
     
-    gameBlock.each(() => {0
-        gameBlock.text("")
+    gameBlock.each(() => {
+        gameBlock.text(" ")
         // console.log(gameBlock)
         
         })
@@ -41,35 +44,72 @@ start()
 function checkBlock(element) {
     if (playerOne == true){
         // console.log("clicks")
-        element.text("X")
-        playerTurn.text("O's Turn")
+        element.text(playerOneChar)
+        playerTurn.text(`${playerTwoChar}'s Turn`)
+        winCheck()
         playerOne = false
         playerTwo = true
         element.off('click')
     } else {
-        element.text("O")
-        playerTurn.text("X's Turn")
+        element.text(playerTwoChar)
+        playerTurn.text(`${playerOneChar}'s Turn`)
+        winCheck()
         playerOne = true
         playerTwo = false
         element.off('click')
     }
-    winCheck(element)
 }
 
 function pickTurn() {
     let choice = Math.floor(Math.random() * 2)
     if(choice == 0){
-        return "X Starts!!"
+        return "O Starts!!"
         // playerTurn = false
     } else {
-       return "O Starts!!"
+       return "X Starts!!"
         // playerOne = false
     }
     
 }
+function winCheck(){
+    let te = gameBlock.text()
+    console.log(te)
+    if (    te.charAt(0) === te.charAt(1) && te.charAt(1) === te.charAt(2) && te.charAt(0) != " "||
+            te.charAt(3) === te.charAt(4) && te.charAt(4) === te.charAt(5) && te.charAt(3) != " "||
+            te.charAt(6) === te.charAt(7) && te.charAt(7) === te.charAt(8) && te.charAt(6) != " "||
+            te.charAt(0) === te.charAt(3) && te.charAt(3) === te.charAt(6) && te.charAt(0) != " "||
+            te.charAt(1) === te.charAt(4) && te.charAt(4) === te.charAt(7) && te.charAt(1) != " "||
+            te.charAt(2) === te.charAt(5) && te.charAt(5) === te.charAt(8) && te.charAt(2) != " "||
+            te.charAt(0) === te.charAt(4) && te.charAt(4) === te.charAt(8) && te.charAt(0) != " "||
+            te.charAt(2) === te.charAt(4) && te.charAt(4) === te.charAt(6) && te.charAt(2) != " "
+        ){
+            if(playerOne === true){
+                playerTurn.text("Player One Win's!")
+                // console.log("winner1")
+            } else if (playerTwo === true){
+                playerTurn.text("Player Two Win's!")
+            }
+        }
+    // console.log(table.children().length)
+    
+}
 
-function winCheck(element){
-    for(let i = 0; i < gameBlock.length; i++){
-        console.log(gameBlock.text())
+function setChar(inp){
+    if(inp.id === "player1-input" && inp.value !== playerTwoChar && inp.value !== " "){
+        gameBlock.each(function (i) {
+            // console.log(gameBlock.text())
+            gameBlock.eq(i).text(gameBlock.eq(i).text().replace(playerOneChar, inp.value))
+            
+        })
+        playerOneChar = inp.value
+    } else if ( inp.id === "player2-input" && inp.value !== playerOneChar && inp.value !== " "){
+        gameBlock.each(function (i) {
+            // console.log(gameBlock.text())
+            gameBlock.eq(i).text(gameBlock.eq(i).text().replace(playerTwoChar, inp.value))
+            
+        })
+        playerTwoChar = inp.value
     }
 }
+
+// .replace()

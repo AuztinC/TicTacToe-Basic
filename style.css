@@ -45,6 +45,7 @@ table {
 }
 
 td{
+    font-size: 4em;
     user-select: none;
     text-align: center;
     border: 2px solid black;
