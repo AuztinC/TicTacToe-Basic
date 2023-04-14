@@ -64,10 +64,12 @@ td {
 #player1-input {
     margin-bottom: 10px;
     font-size: 1.5em;
+    width: 55px;
     
 }
 
 #player2-input {
     margin-top: 10px;
     font-size: 1.5em;
+    width: 55px;
 }

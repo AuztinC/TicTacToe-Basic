@@ -2,6 +2,7 @@ let gameBlock = $('.game-block')
 let playerTurn = $('#player-turn')
 let resetBtn = $('#reset-btn')
 let tr = $('tr')
+const container = $('#container')
 // playerTurn = playerTurn[0]
 // gameBlock = Array.from(gameBlock)
 
@@ -10,19 +11,13 @@ let playerOneChar = "X"
 let playerTwo = null
 let playerTwoChar = "O"
 
-// let activeBlock = true;
 
-// $('#title').on('click', function(){
-//     console.log("titelclick")
-// })
 resetBtn.on('click', start)
 
-// $("td").on('click', function() {
-//     checkBlock($(this))})
-// console.log(playerTurn.innerText)
         // Start the game -- clear all spaces and choose who's turn.
 function start(){
-    
+    playerOne = false
+    playerTwo = false
     gameBlock.off('click')
     
     gameBlock.on('click', function() {
@@ -39,8 +34,8 @@ function start(){
 
 start()
 
+        //make balloons float up to top on win
 
-        // 
 function checkBlock(element) {
     if (playerOne == true){
         // console.log("clicks")
@@ -63,11 +58,11 @@ function checkBlock(element) {
 function pickTurn() {
     let choice = Math.floor(Math.random() * 2)
     if(choice == 0){
+        playerTwo = true
         return "O Starts!!"
-        // playerTurn = false
     } else {
+        playerOne = true
        return "X Starts!!"
-        // playerOne = false
     }
     
 }
@@ -84,10 +79,12 @@ function winCheck(){
             te.charAt(2) === te.charAt(4) && te.charAt(4) === te.charAt(6) && te.charAt(2) != " "
         ){
             if(playerOne === true){
-                playerTurn.text("Player One Win's!")
+                playerTurn.text("🎉 Player One Win's! 🎉")
+                makeBalloons()
                 // console.log("winner1")
             } else if (playerTwo === true){
-                playerTurn.text("Player Two Win's!")
+                playerTurn.text("🎉 Player Two Win's! 🎉")
+                makeBalloons()
             }
         }
     // console.log(table.children().length)
@@ -113,3 +110,16 @@ function setChar(inp){
 }
 
 // .replace()
+
+function makeBalloons(){
+    let balloons = $("<div class='balloon'>🎈</div>")
+    let balPosX = Math.floor(Math.random() * window.innerWidth)
+    let balloonLen = 50
+    for(let i = 0; i < balloonLen; i++){
+        // console.log(balPosX)
+        balloons.css("position", "absolute")
+        balloons.css("left", balPosX + "px")
+        balloons.css("top", "50px")
+        container.append(balloons[i]);
+    }
+}
