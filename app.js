@@ -19,12 +19,18 @@ resetBtn.on('click', start)
 // console.log(playerTurn.innerText)
         // Start the game -- clear all spaces and choose who's turn.
 function start(){
+    
+    gameBlock.off('click')
+    
+    gameBlock.on('click', function() {
+        checkBlock($(this))})
+        
     playerTurn.text( pickTurn() );
+    
     gameBlock.each(() => {0
-        gameBlock.text("XOXO")
+        gameBlock.text("")
         // console.log(gameBlock)
-        gameBlock.on('click', function() {
-            checkBlock($(this))})
+        
         })
 }
 
@@ -54,16 +60,16 @@ function pickTurn() {
     let choice = Math.floor(Math.random() * 2)
     if(choice == 0){
         return "X Starts!!"
-        playerTurn = false
+        // playerTurn = false
     } else {
        return "O Starts!!"
-        playerOne = false
+        // playerOne = false
     }
     
 }
 
 function winCheck(element){
     for(let i = 0; i < gameBlock.length; i++){
-        console.log(element.text())
+        console.log(gameBlock.text())
     }
 }
