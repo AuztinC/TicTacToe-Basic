@@ -10,8 +10,9 @@ let playerOne = null
 let playerOneChar = "X"
 let playerTwo = null
 let playerTwoChar = "O"
+let balloon = [];
 
-
+let gameOver = false
 resetBtn.on('click', start)
 
         // Start the game -- clear all spaces and choose who's turn.
@@ -30,9 +31,16 @@ function start(){
         // console.log(gameBlock)
         
         })
+        
+   // let ballonTime = setTimeout(clearBall, 3000)
+    // clearTimeout(ballonTime)
 }
-
 start()
+// function clearBall(){
+//     $('.balloon').remove()
+//     clearInterval(ballonTime)
+// }
+
 
         //make balloons float up to top on win
 
@@ -62,13 +70,14 @@ function pickTurn() {
         return "O Starts!!"
     } else {
         playerOne = true
-       return "X Starts!!"
+        return "X Starts!!"
     }
-    
 }
 function winCheck(){
+    checkTie()
     let te = gameBlock.text()
-    console.log(te)
+    // console.log(te)
+    
     if (    te.charAt(0) === te.charAt(1) && te.charAt(1) === te.charAt(2) && te.charAt(0) != " "||
             te.charAt(3) === te.charAt(4) && te.charAt(3) === te.charAt(5) && te.charAt(3) != " "||
             te.charAt(6) === te.charAt(7) && te.charAt(7) === te.charAt(8) && te.charAt(6) != " "||
@@ -81,16 +90,31 @@ function winCheck(){
             if(playerOne === true){
                 playerTurn.text("🎉 Player One Win's! 🎉")
                 makeBalloons()
+                gameBlock.off('click')
                 // console.log("winner1")
             } else if (playerTwo === true){
                 playerTurn.text("🎉 Player Two Win's! 🎉")
                 makeBalloons()
-            }
+                gameBlock.off('click')
+            } 
         }
-    // console.log(table.children().length)
+        // console.log(gameBlock.text().indexOf(' ')) 
+    }
     
+    function checkTie(){
+        if( gameBlock.text().indexOf(' ') == -1 ){
+            console.log("Tie")
+            playerTurn.text(`Tie Game!`)
+        }
+    // for(let i = 0; i < gameBlock.length; i++){
+    //     console.log(gameBlock.toString().indexOf(" "))
+        
+    
+    //     if(gameBlock.toString().indexOf(" ") === 0 && gameOver === false){
+    //         console.log("tie")
+    //     }
+    // }
 }
-
 function setChar(inp){
     if(inp.id === "player1-input" && inp.value !== playerTwoChar && inp.value !== " "){
         gameBlock.each(function (i) {
@@ -111,15 +135,22 @@ function setChar(inp){
 
 // .replace()
 
+
 function makeBalloons(){
-    let balloons = $("<div class='balloon'>🎈</div>")
-    let balPosX = Math.floor(Math.random() * window.innerWidth)
-    let balloonLen = 50
-    for(let i = 0; i < balloonLen; i++){
-        // console.log(balPosX)
-        balloons.css("position", "absolute")
-        balloons.css("left", balPosX + "px")
-        balloons.css("top", "50px")
-        container.append(balloons[i]);
+    for(let i = 0; i <= 50; i++){
+        let balPosX = Math.floor(Math.random() * window.innerWidth)
+        let balPosY = Math.floor(Math.random() * window.innerHeight / 3 + window.innerHeight)
+        balloon[i] = $("<div class='balloon'>🎈</div>")
+        balloon[i].css({"position": "absolute",
+                        "user-select": "none"})
+        balloon[i].css("left", balPosX + "px")
+        balloon[i].css("top", balPosY + "px")
+        container.append(balloon[i]);
+        balloon[i].animate({
+            top: "-25px"
+        }, 4000, function(){$(this).remove()})
     }
+    
+
+    // console.log(balloon)
 }
