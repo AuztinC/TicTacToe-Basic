@@ -44,7 +44,7 @@ table {
     border-collapse: collapse;
 }
 
-td{
+td {
     font-size: 4em;
     user-select: none;
     text-align: center;
@@ -59,4 +59,15 @@ td{
     margin-top: 10px;
     justify-content: center;
     align-items: center;
+}
+
+#player1-input {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    
+}
+
+#player2-input {
+    margin-top: 10px;
+    font-size: 1.5em;
 }
