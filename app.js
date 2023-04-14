@@ -75,7 +75,7 @@ function winCheck(){
     let te = gameBlock.text()
     console.log(te)
     if (    te.charAt(0) === te.charAt(1) && te.charAt(1) === te.charAt(2) && te.charAt(0) != " "||
-            te.charAt(3) === te.charAt(4) && te.charAt(4) === te.charAt(5) && te.charAt(3) != " "||
+            te.charAt(3) === te.charAt(4) && te.charAt(3) === te.charAt(5) && te.charAt(3) != " "||
             te.charAt(6) === te.charAt(7) && te.charAt(7) === te.charAt(8) && te.charAt(6) != " "||
             te.charAt(0) === te.charAt(3) && te.charAt(3) === te.charAt(6) && te.charAt(0) != " "||
             te.charAt(1) === te.charAt(4) && te.charAt(4) === te.charAt(7) && te.charAt(1) != " "||
