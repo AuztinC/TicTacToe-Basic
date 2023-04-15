@@ -30,6 +30,13 @@ function start(){
         
     playerTurn.text( pickTurn() );
     
+    if (playerTwo && !multiplayer) {
+        playerTwo = false;
+        checkBlock(null);
+        playerTwo = true;
+    }
+    
+    
     gameBlock.each(() => {
         gameBlock.text(" ")
         // console.log(gameBlock)
@@ -40,12 +47,12 @@ function start(){
 start()
 
 function gameMode(){
-    // console.log(checkbox[0])
     checkbox.checked ? multiplayer = true : multiplayer = false;
+    // console.log(multiplayer)
     // if (checkbox.checked){
-    //     // Co-Op
-    //     multiplayer = true
-    //     console.log("Mult") 
+        //     // Co-Op
+        //     multiplayer = true
+        //     console.log("Mult") 
     //     // Bot DEFAULT 
     // } else {
     //         multiplayer = false
@@ -62,7 +69,7 @@ function checkBlock(element) {
         playerOne = false
         playerTwo = true
         element.off('click')
-    } else {
+    } else if (playerOne == true){ 
         element.text(playerTwoChar)
         playerTurn.text(`${playerOneChar}'s Turn`)
         winCheck()
@@ -70,24 +77,62 @@ function checkBlock(element) {
         playerTwo = false
         element.off('click')
     }
-    // if(!multiplayer){
+    
+    if(!multiplayer){
         
-    //     playerTwo = true
-    //     let botPick = Math.floor(Math.random() * gameBlock.length)
+        // playerTwo = true
         
-    //     if(botPick.innerText == " "){
-    //         botPick = Math.floor(Math.random() * gameBlock.length)
-    //     }
-    //     else {
-    //         let botTime = setTimeout(function(){
-    //             gameBlock[botPick].innerText = playerTwoChar
-    //         }, 500)
-    //     }
-    //     console.log(gameBlock[botPick].innerText)
-    //     playerTwo = false
-    //     playerOne = true
-    // }
+        let botElement = pickSpace();
+        
+        if (botElement != false) {
+            let botTime = setTimeout(function(){
+                botElement.innerHTML = playerTwoChar
+                playerTurn.text(`${playerOneChar}'s Turn`)
+                winCheck()
+                console.log(botElement)
+                playerTwo = false
+                playerOne = true
+            }, 500)
+        }
+    }
 }
+
+
+function pickSpace() {
+    let botPick = Math.floor(Math.random() * gameBlock.length)
+    
+    let i = 0;
+    
+    while(gameBlock[botPick].innerHTML !== " " && i <= 1000){
+        botPick = Math.floor(Math.random() * gameBlock.length);
+        i++;
+    }
+    
+    if (i < 1000) {
+        return gameBlock[botPick];
+    } else {
+        return false;
+    }
+    
+}
+
+
+// let pturn = 0;
+
+// function playerOneMove(element) {
+//     element.text(playerOneChar);
+    
+//     pturn = 2;
+//     playerTurn.text(`${playerTwoChar}'s Turn`)
+// }
+
+// function playerTwoMove(element) {
+//     element.text(playerTwoChar);
+    
+//     pturn = 1;
+//     playerTurn.text(`${playerOneChar}'s Turn`)
+// }
+
 
 function pickTurn() {
     let choice = Math.floor(Math.random() * 2)
@@ -100,7 +145,7 @@ function pickTurn() {
     }
 }
 function winCheck(){
-    checkTie()
+    
     let te = gameBlock.text()
     // console.log(te)
     
@@ -123,16 +168,17 @@ function winCheck(){
                 makeBalloons()
                 gameBlock.off('click')
             } 
+        } else {
+            checkTie();
         }
         // console.log(gameBlock.text().indexOf(' ')) 
     }
     
-    function checkTie(){
-        if( gameBlock.text().indexOf(' ') == -1 ){
-            // console.log("Tie")
-            playerTurn.text(`Tie Game!`)
-        }
-        
+function checkTie(){
+    if( gameBlock.text().indexOf(' ') == -1 ){
+        // console.log("Tie")
+        playerTurn.text(`Tie Game!`)
+    }   
 }
 function setChar(inp){
     if(inp.id === "player1-input" && inp.value !== playerTwoChar && inp.value !== " "){
