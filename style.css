@@ -54,6 +54,10 @@ td {
     height: 33%;
 }
 
+h2{
+    margin: 5px;
+}
+
 #reset-btn {
     padding: 15px;
     margin-top: 10px;
@@ -74,9 +78,9 @@ td {
     width: 55px;
 }
 .switch {
-    position: absolute;
-    left: 35%;
-    top: 76%;
+    position: relative;
+    left: 120px;
+    top: 600px;
     width: 80px;
     height: 34px;
 }
@@ -136,11 +140,13 @@ border-radius: 50%;
 }
 
 .fa-rob{
+    user-select: none;
     position: relative;
     right: 0px;
     bottom: 25px;
 }
 .fa-mult{
+    user-select: none;
     position: relative;
     left: 25px;
     bottom: 25px;

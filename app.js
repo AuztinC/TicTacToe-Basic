@@ -70,23 +70,23 @@ function checkBlock(element) {
         playerTwo = false
         element.off('click')
     }
-    if(!multiplayer){
+    // if(!multiplayer){
         
-        playerTwo = true
-        let botPick = Math.floor(Math.random() * gameBlock.length)
+    //     playerTwo = true
+    //     let botPick = Math.floor(Math.random() * gameBlock.length)
         
-        if(botPick.innerText == " "){
-            botPick = Math.floor(Math.random() * gameBlock.length)
-        }
-        else {
-            let botTime = setTimeout(function(){
-                gameBlock[botPick].innerText = playerTwoChar
-            }, 500)
-        }
-        console.log(gameBlock[botPick].innerText)
-        playerTwo = false
-        playerOne = true
-    }
+    //     if(botPick.innerText == " "){
+    //         botPick = Math.floor(Math.random() * gameBlock.length)
+    //     }
+    //     else {
+    //         let botTime = setTimeout(function(){
+    //             gameBlock[botPick].innerText = playerTwoChar
+    //         }, 500)
+    //     }
+    //     console.log(gameBlock[botPick].innerText)
+    //     playerTwo = false
+    //     playerOne = true
+    // }
 }
 
 function pickTurn() {
