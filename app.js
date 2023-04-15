@@ -84,9 +84,9 @@ function checkBlock(element) {
             }, 500)
         }
         console.log(gameBlock[botPick].innerText)
+        playerTwo = false
+        playerOne = true
     }
-    playerTwo = false
-    playerOne = true
 }
 
 function pickTurn() {
