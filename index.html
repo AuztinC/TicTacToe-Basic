@@ -9,10 +9,18 @@
     <title>TicTacToe</title>
 </head>
 <body>
+
     <div id="container">
-        
+        <label class="switch">
+            <span class="fa-rob">🤖</span>
+            <span class="fa-mult">🤼‍♂️</span>
+            <input type="checkbox" id="checkbox" onclick="gameMode()">
+            <span class="slider round"></span>
+          </label>
+          
         <h1 id="title">Tic Tac Toe, Here We Go!</h1>
         <h2 id="player-turn">X's turn</h2>
+        
         <input type="text" id="player1-input" class="player-input" placeholder="X" maxlength="3" onchange="setChar(this)" onkeyup="this.value = this.value.toUpperCase()">
         <div id="game-board">
             <table>

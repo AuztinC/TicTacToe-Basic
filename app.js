@@ -3,8 +3,11 @@ let playerTurn = $('#player-turn')
 let resetBtn = $('#reset-btn')
 let tr = $('tr')
 const container = $('#container')
+const checkbox = document.getElementById('checkbox')
 // playerTurn = playerTurn[0]
 // gameBlock = Array.from(gameBlock)
+
+let multiplayer = false
 
 let playerOne = null
 let playerOneChar = "X"
@@ -17,6 +20,7 @@ resetBtn.on('click', start)
 
         // Start the game -- clear all spaces and choose who's turn.
 function start(){
+    gameMode()
     playerOne = false
     playerTwo = false
     gameBlock.off('click')
@@ -32,17 +36,22 @@ function start(){
         
         })
         
-   // let ballonTime = setTimeout(clearBall, 3000)
-    // clearTimeout(ballonTime)
 }
 start()
-// function clearBall(){
-//     $('.balloon').remove()
-//     clearInterval(ballonTime)
-// }
 
-
-        //make balloons float up to top on win
+function gameMode(){
+    // console.log(checkbox[0])
+    checkbox.checked ? multiplayer = true : multiplayer = false;
+    // if (checkbox.checked){
+    //     // Co-Op
+    //     multiplayer = true
+    //     console.log("Mult") 
+    //     // Bot DEFAULT 
+    // } else {
+    //         multiplayer = false
+    //         console.log("bot")
+    //     }
+}
 
 function checkBlock(element) {
     if (playerOne == true){
@@ -61,6 +70,23 @@ function checkBlock(element) {
         playerTwo = false
         element.off('click')
     }
+    if(!multiplayer){
+        
+        playerTwo = true
+        let botPick = Math.floor(Math.random() * gameBlock.length)
+        
+        if(botPick.innerText == " "){
+            botPick = Math.floor(Math.random() * gameBlock.length)
+        }
+        else {
+            let botTime = setTimeout(function(){
+                gameBlock[botPick].innerText = playerTwoChar
+            }, 500)
+        }
+        console.log(gameBlock[botPick].innerText)
+    }
+    playerTwo = false
+    playerOne = true
 }
 
 function pickTurn() {
@@ -88,12 +114,12 @@ function winCheck(){
             te.charAt(2) === te.charAt(4) && te.charAt(4) === te.charAt(6) && te.charAt(2) != " "
         ){
             if(playerOne === true){
-                playerTurn.text("🎉 Player One Win's! 🎉")
+                playerTurn.text(`🎉 ${playerOneChar}'s Win's! 🎉`)
                 makeBalloons()
                 gameBlock.off('click')
                 // console.log("winner1")
             } else if (playerTwo === true){
-                playerTurn.text("🎉 Player Two Win's! 🎉")
+                playerTurn.text(`🎉 ${playerTwoChar}'s Win's! 🎉`)
                 makeBalloons()
                 gameBlock.off('click')
             } 
@@ -103,17 +129,10 @@ function winCheck(){
     
     function checkTie(){
         if( gameBlock.text().indexOf(' ') == -1 ){
-            console.log("Tie")
+            // console.log("Tie")
             playerTurn.text(`Tie Game!`)
         }
-    // for(let i = 0; i < gameBlock.length; i++){
-    //     console.log(gameBlock.toString().indexOf(" "))
         
-    
-    //     if(gameBlock.toString().indexOf(" ") === 0 && gameOver === false){
-    //         console.log("tie")
-    //     }
-    // }
 }
 function setChar(inp){
     if(inp.id === "player1-input" && inp.value !== playerTwoChar && inp.value !== " "){
@@ -134,8 +153,6 @@ function setChar(inp){
 }
 
 // .replace()
-
-
 function makeBalloons(){
     for(let i = 0; i <= 50; i++){
         let balPosX = Math.floor(Math.random() * window.innerWidth)
@@ -150,7 +167,5 @@ function makeBalloons(){
             top: "-25px"
         }, 4000, function(){$(this).remove()})
     }
-    
-
     // console.log(balloon)
 }
