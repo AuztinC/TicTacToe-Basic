@@ -88,6 +88,7 @@ function checkBlock(element) {
             let botTime = setTimeout(function(){
                 botElement.innerHTML = playerTwoChar
                 playerTurn.text(`${playerOneChar}'s Turn`)
+                element.off('click')
                 winCheck()
                 console.log(botElement)
                 playerTwo = false
