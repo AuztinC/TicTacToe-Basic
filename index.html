@@ -20,7 +20,8 @@
           
         <h1 id="title">Tic Tac Toe, Here We Go!</h1>
         <h2 id="player-turn">X's turn</h2>
-        
+        <!-- <label for="favcolor">Select your favorite color:</label> -->
+        <input type="color" class="favcolor" name="favcolor" value="#ff0000">
         <input type="text" id="player1-input" class="player-input" placeholder="X" maxlength="3" onchange="setChar(this)" onkeyup="this.value = this.value.toUpperCase()">
         <div id="game-board">
             <table>
@@ -36,6 +37,7 @@
             </table>
         </div>
         <input type="text" id="player2-input" class="player-input" placeholder="O" maxlength="3" onchange="setChar(this)" onkeyup="this.value = this.value.toUpperCase()">
+        <input type="color" class="favcolor" name="favcolor" value="#000000">
         <button id="reset-btn">Again!</button>
         
         
