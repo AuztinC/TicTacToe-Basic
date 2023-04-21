@@ -111,6 +111,7 @@ function pickSpace() {
     
     if (i < 1000) {
         return gameBlock[botPick];
+          playerOne = true;
     } else {
         return false;
     }
